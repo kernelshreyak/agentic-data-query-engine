@@ -1,0 +1,145 @@
+{
+  "company": "TechNova Inc.",
+  "description": "TechNova Inc. is a global leader in AI-driven solutions, cloud computing, and enterprise automation. The company provides cutting-edge technologies to enhance business productivity, streamline operations, and improve decision-making using AI and data analytics.",
+  "headquarters": "San Francisco, CA, USA",
+  "founded": 2012,
+  "industries_served": ["Healthcare", "Finance", "Retail", "Manufacturing", "Telecommunications"],
+  "products": [
+    {
+      "name": "NovaAI",
+      "category": "Artificial Intelligence",
+      "description": "NovaAI is an advanced AI platform that delivers capabilities across natural language processing (NLP), computer vision, and predictive analytics. It helps businesses automate workflows, generate insights, and optimize decision-making using machine learning models.",
+      "features": [
+        "Natural Language Processing (NLP) for chatbots and virtual assistants",
+        "Computer Vision for image and video analysis",
+        "Predictive Analytics for business intelligence",
+        "Automated Data Cleaning and Preprocessing",
+        "Custom AI Model Training and Deployment"
+      ],
+      "use_cases": [
+        {
+          "industry": "Healthcare",
+          "example": "AI-assisted diagnostics for medical imaging."
+        },
+        {
+          "industry": "Finance",
+          "example": "Fraud detection using predictive analytics."
+        },
+        {
+          "industry": "Retail",
+          "example": "Personalized product recommendations."
+        }
+      ],
+      "pricing": {
+        "basic": "$49/month - Includes basic NLP and vision capabilities",
+        "pro": "$99/month - Adds predictive analytics and advanced AI training",
+        "enterprise": "Custom pricing - Includes API access, advanced AI tuning, and enterprise support"
+      }
+    },
+    {
+      "name": "CloudNova",
+      "category": "Cloud Computing",
+      "description": "CloudNova is a highly scalable cloud computing platform offering storage, computing power, and security solutions tailored for enterprise applications. It supports multi-cloud and hybrid cloud deployments.",
+      "features": [
+        "Scalable Cloud Storage with High Availability",
+        "Serverless Computing with Auto-Scaling",
+        "Data Encryption with Compliance Certifications",
+        "Multi-Region Deployment with Load Balancing",
+        "API Access for Custom Cloud Solutions"
+      ],
+      "use_cases": [
+        {
+          "industry": "Manufacturing",
+          "example": "IoT-enabled predictive maintenance for factory machines."
+        },
+        {
+          "industry": "Telecommunications",
+          "example": "Cloud-based infrastructure for 5G network management."
+        }
+      ],
+      "pricing": {
+        "pay-as-you-go": "Starts at $0.02/GB per month for storage",
+        "enterprise": "Custom pricing based on resource usage"
+      }
+    }
+  ],
+  "services": [
+    {
+      "name": "AI Consulting",
+      "description": "TechNova’s AI consulting service helps businesses design, develop, and deploy AI-powered applications, ensuring optimized performance and scalability.",
+      "benefits": [
+        "Custom AI Model Development",
+        "End-to-End AI Deployment Strategy",
+        "Ongoing AI Model Optimization"
+      ],
+      "pricing": "Custom pricing based on project requirements"
+    },
+    {
+      "name": "Cloud Migration",
+      "description": "TechNova assists businesses in seamlessly migrating their workloads to CloudNova with minimal downtime and optimized resource allocation.",
+      "benefits": [
+        "Seamless Infrastructure Migration",
+        "Cost Optimization Strategies",
+        "Security and Compliance Integration"
+      ],
+      "pricing": "Custom pricing based on data size and complexity"
+    },
+    {
+      "name": "Enterprise Support",
+      "description": "24/7 technical support and personalized assistance for businesses using TechNova's AI and cloud solutions.",
+      "features": [
+        "Dedicated Account Manager",
+        "Priority Issue Resolution",
+        "Real-Time System Monitoring"
+      ],
+      "pricing": "Available for enterprise customers only"
+    }
+  ],
+  "customer_success_stories": [
+    {
+      "company": "FinBank Corp.",
+      "industry": "Finance",
+      "challenge": "Detecting fraudulent transactions in real time.",
+      "solution": "Implemented NovaAI’s predictive analytics to flag high-risk transactions before processing.",
+      "results": "Reduced fraud losses by 40% within the first year."
+    },
+    {
+      "company": "MediCare Solutions",
+      "industry": "Healthcare",
+      "challenge": "Improving diagnostic accuracy using AI.",
+      "solution": "Used NovaAI’s computer vision technology to analyze X-ray and MRI scans.",
+      "results": "Increased diagnostic accuracy by 25% compared to manual review."
+    }
+  ],
+  "support": {
+    "contact_email": "support@technova.com",
+    "phone": "+1-800-TECH-NOVA",
+    "faq": [
+      {
+        "question": "How can I upgrade my NovaAI plan?",
+        "answer": "You can upgrade your plan through the dashboard by selecting a new subscription tier, or contact support for assistance."
+      },
+      {
+        "question": "Does CloudNova provide automatic backups?",
+        "answer": "Yes, CloudNova offers automated daily backups with retention policies based on your selected plan."
+      },
+      {
+        "question": "What is the SLA for enterprise customers?",
+        "answer": "Enterprise customers receive a 99.9% uptime guarantee with 24/7 priority support."
+      },
+      {
+        "question": "Can I integrate NovaAI with my existing CRM?",
+        "answer": "Yes, NovaAI provides API integrations for seamless connection with popular CRM platforms."
+      }
+    ]
+  },
+  "policies": {
+    "refund_policy": "Customers can request a refund within 30 days of purchase for eligible products and services.",
+    "data_privacy": "TechNova Inc. complies with GDPR and ensures user data protection with industry-standard encryption.",
+    "terms_of_service": "Use of TechNova Inc. services is subject to the terms and conditions outlined on our website.",
+    "security_compliance": {
+      "certifications": ["ISO 27001", "SOC 2 Type II", "HIPAA"],
+      "data_encryption": "AES-256 encryption for data at rest and in transit."
+    }
+  }
+}

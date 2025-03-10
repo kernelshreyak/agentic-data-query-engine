@@ -1,0 +1,4 @@
+fastapi
+crewai
+dotenv-python
+uvicorn

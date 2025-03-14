@@ -2,3 +2,6 @@ fastapi
 crewai
 dotenv-python
 uvicorn
+sqlalchemy
+psycopg2-binary
+alembic

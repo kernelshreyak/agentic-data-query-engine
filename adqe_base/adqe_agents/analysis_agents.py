@@ -1,15 +1,9 @@
 from crewai import Agent
-import yaml
 from agent_tools import download_data, filecheck, execute_python_code
 
-agents_data = None
-with open("agents.yaml", 'r') as file:
-    agents_data = yaml.safe_load(file)
-
-# define agents
-coordinator_agent = Agent(
-    role="Coordinator",
-    goal="Manages user queries and delegates tasks to appropriate agents to retrieve and analyze data.",
+analysis_coordinator_agent = Agent(
+    role="Analysis Coordinator",
+    goal="Manages analysis of the given data source and delegates tasks to appropriate agents to retrieve and analyze data.",
     backstory= """
     The coordinator receives a user query: {user_query} and determines how to obtain and analyze the required data.
     If the data source is a local file, it verifies its existence using the filecheck tool. If the file exists, the coordinator assigns the task to the Data Analyst for processing.

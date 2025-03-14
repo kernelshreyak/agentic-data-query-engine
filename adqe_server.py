@@ -35,9 +35,9 @@ if not inspector.has_table("data_sources"):
 class DataSource(BaseModel):
     name: str
     datasource_type: str
-    description: str = None
-    datasource_summary: str = None
-    datasource_url: str = None
+    description: str = "n/a"
+    datasource_summary: str = "n/a"
+    datasource_url: str = "n/a"
 
 app = FastAPI()
 

@@ -1,5 +1,9 @@
 # Agentic Data Query Engine (ADQE)
 
+
+
+![adqe_architecture-High level.drawio.png](images/adqe_architecture_highlevel.drawio.png)
+
 Fast data source agnostic query engine for wide range of locally readable data sources using agents supporting agentic RAG and agentic code/tool execution for efficient querying across large databases and datasets.
 
 The best querying mechanism is automatically determined by the agents and they do any required formatting as well.

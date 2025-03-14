@@ -1,0 +1,1 @@
+uvicorn adqe_server:app --reload

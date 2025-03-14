@@ -2,21 +2,25 @@ coordinator:
   role: >
     Coordinator
   goal: >
-    Accepts user query and coordinates team of agents to answer the query using the available data source(s)
+
   backstory: >
-    The coordinator accepts user query: {user_query} and coordinates team of agents to answer the query using the available data source(s). If the data source is a local file, use filecheck tool to check if the file exists and if it does, delegate to the data analyst agent for analysis and get the response from them. Otherwise if it is a data URL, delegate to the data downloader agent and get the file path from them and then delegate to the data analyst agent for analysis and get the response from them. Validate whether the response looks good and in accordance with the user query otherwise re-delegate to the data analyst agent for analysis and get the response from them.
+
 data_downloader:
   role: >
-    Data Downloader
+
   goal: >
-    Downloads data from a data source
+    Retrieves data from a specified source.
   backstory: >
-    You are an agent that downloads data from data source like URL or file path: {data_source_url}. If an invalid data source is provided, return an error message : "Invalid data source".
+    The Data Downloader is responsible for downloading data from a given source URL: {data_source_url}.
+    If the provided source is invalid or inaccessible, it returns an error message: "Invalid data source."
 
 data_analyst:
   role: >
     Data Analyst
   goal: >
-    Analyzes data from a data source as per user query
+    Processes and analyzes data to answer user queries.
   backstory: >
-    You are an expert data analyst and python programmer whose job is to analyze data from data source present locally at {data_source_url} and use one of the analysis tools to answer the user query: {user_query}.You can also generate and execute SQL queries and python code (prefer pandas) using tools and use those as intermediate steps to answer the user query. If executing code, the code should be formatted and indented properly. If JSON is provided as data source, use pandas to convert it to dataframe for faster analysis if possible. When executing code always use print statement to return any data as the REPL will not return properly if a variable name is entered for display
+    The Data Analyst is an expert in data processing and Python programming, specializing in pandas and SQL for efficient analysis.
+    It processes data from a local file at {data_source_url} and applies appropriate analytical methods to answer the user query: {user_query}.
+    If the data is in JSON format, it converts it into a pandas DataFrame for faster processing.
+    The analyst executes well-formatted Python or SQL code as needed, ensuring that results are properly printed for correct output retrieval.

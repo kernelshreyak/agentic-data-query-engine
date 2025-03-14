@@ -1,5 +1,5 @@
 from crewai import Task
-from agents import coordinator_agent
+from adqe_agents.analysis_agents import analysis_coordinator_agent
 
 # define tasks
 analysis_task = Task(
@@ -9,5 +9,5 @@ analysis_task = Task(
     expected_output="""
         A data analysis report in text as per the user query
     """,
-    agent=coordinator_agent
+    agent=analysis_coordinator_agent
 )

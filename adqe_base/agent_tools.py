@@ -3,6 +3,7 @@ from crewai.tools import tool
 import os
 import requests
 import pandas as pd
+import numpy as np
 import sys
 import io
 
@@ -15,14 +16,14 @@ def filecheck(file_path: str) -> str:
         return "File does not exist"   
         
 @tool("download_data")
-def download_data(data_url: str) -> str:
+def download_data(datasource_url: str,datasource_type: str) -> str:
     """Download data from a given URL and save it to a local file."""
     try:
-        response = requests.get(data_url, stream=True)
+        response = requests.get(datasource_url, stream=True)
         response.raise_for_status()  # Raise an error for bad responses
 
         # Extract filename from URL
-        filename = data_url.split("/")[-1]
+        filename = datasource_url.split("/")[-1]
         local_file = os.path.join(os.getcwd(), filename)
         
         # check if file exists

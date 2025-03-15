@@ -6,6 +6,7 @@ import pandas as pd
 import numpy as np
 import sys
 import io
+from data_models import DataSource
 
 @tool("filecheck")
 def filecheck(file_path: str) -> str:
@@ -15,30 +16,17 @@ def filecheck(file_path: str) -> str:
     else:
         return "File does not exist"   
         
-@tool("download_data")
-def download_data(datasource_url: str,datasource_type: str) -> str:
-    """Download data from a given URL and save it to a local file."""
+@tool("extract_data")
+def extract_data(datasource: DataSource) -> str:
+    """Extract data from a data source based on its type."""
     try:
-        response = requests.get(datasource_url, stream=True)
-        response.raise_for_status()  # Raise an error for bad responses
-
-        # Extract filename from URL
-        filename = datasource_url.split("/")[-1]
-        local_file = os.path.join(os.getcwd(), filename)
-        
-        # check if file exists
-        if os.path.exists(local_file):
-            return local_file
-
-        # Save file locally
-        with open(local_file, "wb") as file:
-            for chunk in response.iter_content(chunk_size=8192):
-                file.write(chunk)
-
-        return local_file  # Return the path of the downloaded file
+        if datasource.datasource_type == "csv":
+            return pd.read_csv(datasource.datasource_url)
+        elif datasource.datasource_type == "json":  
+            return pd.read_json(datasource.datasource_url)
 
     except requests.exceptions.RequestException as e:
-        return f"Error downloading file: {e}"
+        return f"Error extracting data from data source {{datasource.datasource_url}}: {e}"
 
 @tool("json_to_dataframe")
 def json_to_dataframe(json_data: str):

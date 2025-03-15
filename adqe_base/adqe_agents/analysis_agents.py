@@ -1,5 +1,5 @@
 from crewai import Agent
-from agent_tools import download_data, filecheck, execute_python_code
+from agent_tools import extract_data, filecheck, execute_python_code
 
 analysis_coordinator_agent = Agent(
     role="Analysis Coordinator",
@@ -15,15 +15,18 @@ analysis_coordinator_agent = Agent(
     llm="gpt-4o"
 )
 
-data_downloader_agent = Agent(
-    role=" Data Downloader",
+data_extractor_agent = Agent(
+    role=" Data Extractor",
     goal="Retrieves data from a specified data source.",
     backstory="""
-    The Data Downloader is responsible for downloading data from a given data source URL: {data_source_url}.
-    If the provided source is invalid or inaccessible, it returns an error message: "Invalid data source."
+    The Data Extractor is responsible for extracting data from a given data source URL(can be a local file path, remote file URL or a 
+    database connection URI): {data_source_url}.
+    Use the extract_data tool to extract data from the data source for common file types such as CSV, JSON, Excel, etc."
+    If it is not possible to use the extract_data tool, use the execute_python_code tool to execute Python code to extract data from the data source (retry 5 times if code does not work).
+    Data source type: {data_source_type}
     """,
     verbose=True,
-    tools=[download_data],
+    tools=[extract_data,execute_python_code],
     allow_delegation=False,
     llm="gpt-4o"
 )

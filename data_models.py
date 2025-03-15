@@ -40,16 +40,37 @@ class DataSourceModel(Base):
     datasource_url = Column(String, nullable=False)
 
 class TaskModel(Base):
+    """
+    SQLAlchemy model for tasks
+    """
     __tablename__ = "tasks"
 
     task_id = Column(UUID(as_uuid=True), primary_key=True, index=True, default=uuid.uuid4)
+    """
+    Unique identifier for each task
+    """
     rq_job_id = Column(String, nullable=True)
+    """
+    Job ID of the task in the RQ queue
+    """
     task_type = Column(String, nullable=False)
+    """
+    Type of task (e.g. analysis, querying)
+    """
     task_status = Column(String, nullable=False,default="pending")
+    """
+    Status of the task (e.g. pending, completed, failed)
+    """
     data_source_id = Column(UUID, nullable=False)
+    """
+    Foreign key referencing the data source this task is associated with
+    """
 
 # Pydantic Models
 class DataSource(BaseModel):
+    """
+    Represents a data source with its type and description.
+    """
     name: str
     datasource_type: str
     description: str = "n/a"

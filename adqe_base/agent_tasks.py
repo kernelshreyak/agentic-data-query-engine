@@ -1,5 +1,5 @@
 from crewai import Task
-from adqe_agents.analysis_agents import analysis_coordinator_agent
+from adqe_base.adqe_agents.analysis_agents import analysis_coordinator_agent
 
 # define tasks
 analysis_task = Task(

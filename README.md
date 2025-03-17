@@ -13,3 +13,16 @@ Currently tesed with Open AI GPT-4o
 Supported data sources:
 - Any locally readable file format (type needs to be specified when adding the data source)
 - Any SQL database (ideally) as connnector development and driver installation is done by agents (as long as they have sufficient permissions)
+
+
+
+## Installation
+```bash
+pip install -r requirements.txt
+sh start.sh
+```
+
+## Start the RQ worker in a separate terminal
+```bash
+rq worker --with-scheduler
+```

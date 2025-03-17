@@ -1,5 +1,4 @@
 from crewai import Agent
-from agent_tools import download_data, filecheck, execute_python_code
 
 querying_coordinator_agent = Agent(
     role="Querying Coordinator",
@@ -10,7 +9,7 @@ querying_coordinator_agent = Agent(
     If the data source is a URL, it first delegates the task to the Data Downloader to retrieve the file, then assigns the downloaded file to the Data Analyst for processing.
     After receiving the analysis results, the coordinator validates them for accuracy and relevance to the original query. If necessary, it requests a reanalysis from the Data Analyst.""",
     verbose=True,
-    tools=[filecheck],
+    # tools=[],
     allow_delegation=True,
     llm="gpt-4o"
 )

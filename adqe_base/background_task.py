@@ -2,7 +2,6 @@
 
 from data_models import SessionLocal,TaskModel,DataSourceModel
 from rq.job import get_current_job
-import os
 from adqe_base.agent_teams import analysis_team
 
 def analysis_task_execution(task_input: str,data_source_id: str) -> None:
@@ -18,12 +17,18 @@ def analysis_task_execution(task_input: str,data_source_id: str) -> None:
         return
     
     print(f"""Task {task.task_id} started for data source {data_source_id} TASK_TYPE: {task.task_type} """)
+    try:
+        datasource = db.query(DataSourceModel).filter(DataSourceModel.datasource_id == data_source_id).first()
+        
+        response = analysis_team.kickoff(inputs={"user_query": task_input,"data_source_url": datasource.datasource_url,"data_source_type": datasource.datasource_type,"data_source_id": data_source_id})
 
-    datasource = db.query(DataSourceModel).filter(DataSourceModel.data_source_id == data_source_id).first()
-
-    response = analysis_team.kickoff(inputs={"user_query": task_input,"data_source_url": datasource.datasource_url})
-
-    task.task_status = "completed"
+        datasource.datasource_summary = response.raw
+        task.task_status = "completed"
+        print("task response",response)
+    except Exception as e:
+        print("Task failed. Error: ",e)
+        task.task_status = "failed"
+    
     db.commit()
-    print(response)
+    
     return

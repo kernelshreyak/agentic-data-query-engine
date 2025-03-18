@@ -88,3 +88,10 @@ class AnalysisRequest(BaseModel):
 
 class AnalysisTaskResponse(BaseModel):
     analysis_summary_report: str
+
+class DirectQueryRequest(BaseModel):
+    data_source_id: str
+    user_query: str
+
+class DirectQueryResponse(BaseModel):
+    query_summary_report: str

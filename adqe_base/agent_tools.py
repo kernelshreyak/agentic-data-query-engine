@@ -6,7 +6,7 @@ import pandas as pd
 import numpy as np
 import sys
 import io
-from data_models import DataSource
+import matplotlib.pyplot as plt
 
 @tool("filecheck")
 def filecheck(file_path: str) -> str:
@@ -17,13 +17,17 @@ def filecheck(file_path: str) -> str:
         return "File does not exist"   
         
 @tool("extract_data")
-def extract_data(datasource: DataSource) -> str:
-    """Extract data from a data source based on its type."""
+def extract_data(datasource_url: str,datasource_type: str,rows_to_extract: int = 1000) -> str:
+    """Extract data from a data source based on its type. rows_to_extract decides how many rows of data to extract"""
     try:
-        if datasource.datasource_type == "csv":
-            return pd.read_csv(datasource.datasource_url)
-        elif datasource.datasource_type == "json":  
-            return pd.read_json(datasource.datasource_url)
+        if datasource_type == "csv":
+            return pd.read_csv(datasource_url).head(rows_to_extract)
+        elif datasource_type == "json":  
+            return pd.read_json(datasource_url).head(rows_to_extract)
+        elif datasource_type == "excel":
+            return pd.read_excel(datasource_url).head(rows_to_extract)
+        else:
+            return f"Unsupported data source type for deterministic data extraction using extract_data tool: {datasource_url} so a custom connector code needs to be written"
 
     except requests.exceptions.RequestException as e:
         return f"Error extracting data from data source {{datasource.datasource_url}}: {e}"
@@ -48,7 +52,7 @@ def execute_python_code(code: str) -> str:
     sys.stdout = io.StringIO()
 
     try:
-        exec(code, {"pd": pd, "np": np})  # Execute with Pandas & Numpy in the global scope
+        exec(code, {"pd": pd, "np": np, "plt": plt,"matplotlib": plt})  # Execute with Pandas & Numpy in the global scope
         output = sys.stdout.getvalue()  # Get printed output
     except Exception as e:
         output = f"Error executing code: {e}"
@@ -56,3 +60,14 @@ def execute_python_code(code: str) -> str:
         sys.stdout = old_stdout  # Restore original stdout
 
     return output
+
+
+@tool("write_file")
+def write_file(file_path: str, content: str) -> str:
+    """Write content to a file at the specified path."""
+    try:
+        with open(file_path, "w") as file:
+            file.write(content)
+        return f"File '{file_path}' written successfully."
+    except IOError as e:
+        return f"Error writing to file '{file_path}': {e}"

@@ -1,9 +1,12 @@
 from fastapi import FastAPI, Depends
 from sqlalchemy.orm import Session
-from data_models import Base,DataSource, DataSourceModel, AnalysisRequest,TaskModel,get_db
+from data_models import DataSource, DataSourceModel, AnalysisRequest,TaskModel,get_db,DirectQueryRequest,DirectQueryResponse
 from redis import Redis
 from rq import Queue
 from adqe_base.background_task import analysis_task_execution
+from crewai import LLM
+import os
+
 
 app = FastAPI()
 
@@ -43,3 +46,15 @@ def datasource_analyze(analysis_request: AnalysisRequest, db: Session = Depends(
         "data_source_id": analysis_request.data_source_id,
         "task_id": task.task_id
     }
+
+# GET endpoint - Direct querying
+@app.get("/query/direct")
+def list_tasks(data:DirectQueryRequest, db: Session = Depends(get_db)):
+    datasource = db.query(DataSourceModel).filter(DataSourceModel.datasource_id == data.data_source_id).first()
+    llm = LLM(model="gpt-4o-mini",api_key=os.environ["OPENAI_API_KEY"],response_format=DirectQueryResponse)
+    data_source_summary = datasource.datasource_summary
+    response = llm.call(
+        f"""
+          Given the following data source summary: {data_source_summary} and the user query: {data.user_query}, return the answer to the user query.
+        """
+    )

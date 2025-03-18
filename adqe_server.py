@@ -6,7 +6,7 @@ from rq import Queue
 from adqe_base.background_task import analysis_task_execution
 from crewai import LLM
 import os
-
+import json
 
 app = FastAPI()
 
@@ -58,3 +58,5 @@ def list_tasks(data:DirectQueryRequest, db: Session = Depends(get_db)):
           Given the following data source summary: {data_source_summary} and the user query: {data.user_query}, return the answer to the user query.
         """
     )
+
+    return json.loads(response)

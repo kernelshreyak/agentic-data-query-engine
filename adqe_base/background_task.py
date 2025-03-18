@@ -19,10 +19,15 @@ def analysis_task_execution(task_input: str,data_source_id: str) -> None:
     print(f"""Task {task.task_id} started for data source {data_source_id} TASK_TYPE: {task.task_type} """)
     try:
         datasource = db.query(DataSourceModel).filter(DataSourceModel.datasource_id == data_source_id).first()
-        
-        response = analysis_team.kickoff(inputs={"user_query": task_input,"data_source_url": datasource.datasource_url,"data_source_type": datasource.datasource_type,"data_source_id": data_source_id})
+        if datasource.datasource_type == "analysis":
+            response = analysis_team.kickoff(inputs={"user_query": task_input,"data_source_url": datasource.datasource_url,"data_source_type": datasource.datasource_type,"data_source_id": data_source_id})
 
-        datasource.datasource_summary = response.raw
+            datasource.datasource_summary = response.raw
+        elif datasource.datasource_type == "query":
+            # TODO: implement agentic query kickoff
+            pass
+        else:
+            response = "Unsupported data source type"
         task.task_status = "completed"
         print("task response",response)
     except Exception as e:
